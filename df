@@ -1,0 +1,13 @@
+import RPi.GPIO as GPIOimport timeimport math
+def lightUp(ledNumber,period): GPIO.setmode(GPIO.BCM) GPIO.setup(ledNumber,GPIO.OUT) GPIO.output(ledNumber,1) time.sleep(period) GPIO.output(ledNumber,0)
+
+
+def blink(ledNumber,C,P): GPIO.setmode(GPIO.BCM) GPIO.setup(ledNumber,GPIO.OUT) for i in range(0,C): GPIO.output(ledNumber,1) time.sleep(P) GPIO.output(ledNumber,0) time.sleep(P)
+
+def runningLight(C,P): d=(24,25,8,7,12,16,20,21) for j in range(0,C): for i in d: lightUp(i,P)
+
+def runningDark(C,P): d=(24,25,8,7,12,16,20,21) for i in d: GPIO.setmode(GPIO.BCM) GPIO.setup(i,GPIO.OUT) GPIO.output(i,1) for j in range(0,C): for k in d: GPIO.setmode(GPIO.BCM) GPIO.setup(k,GPIO.OUT) GPIO.output(k,0) time.sleep(P) GPIO.output(k,1) 
+
+def decToBinList(Num): d=(24,25,8,7,12,16,20,21) for i in d: GPIO.setmode(GPIO.BCM) GPIO.setup(i,GPIO.OUT) N=7 p=0 while N>=0: p=int(Num/2**N) if p==1: GPIO.output(d[N],1) Num-=2**N else: GPIO.output(d[N],0) N-=1
+
+
